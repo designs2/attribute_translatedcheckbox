@@ -8,12 +8,12 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2013-07-08T04:11:40+02:00
+ * last-updated: 2013-07-08T08:16:40+02:00
  */
 
-
-$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['check_allowpreview']['0']                  = 'Ignorar il filter en il modus da prevista';
-$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['check_allowpreview']['1']                  = 'Sche questa chaschetta è activada na vegn quest filter betg applitgà sch\'in utilisader e en la prevista dal front-end ed ha activà l\'opziun \'mussar elements anc betg publitgads\'.';
-$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['check_ignorepublished']['0']               = 'Lubir da surscriver parameters';
-$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['check_ignorepublished']['1']               = 'Sche ti activeschas questa chaschetta pon parameters da filters surscriver questa configuraziun.';
-$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['typedesc']['translatedcheckbox_published'] = '%s <strong>%s</strong> %s <br /> da l\'attribut <em>%s</em>';
+$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['check_allowpreview']['0']                   = 'Ignorar il filter en il modus da prevista';
+$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['check_allowpreview']['1']                   = 'Sche questa chaschetta è activada na vegn quest filter betg applitgà sch\'in utilisader e en la prevista dal front-end ed ha activà l\'opziun \'mussar elements anc betg publitgads\'.';
+$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['check_ignorepublished']['0']                = 'Lubir da surscriver parameters';
+$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['check_ignorepublished']['1']                = 'Sche ti activeschas questa chaschetta pon parameters da filters surscriver questa configuraziun.';
+$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['typedesc']['translatedcheckbox_published']  = '%s <strong>%s</strong> %s <br /> da l\'attribut <em>%s</em>';
+$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['typenames']['translatedcheckbox_published'] = 'Stadi da publicaziun translatà';
