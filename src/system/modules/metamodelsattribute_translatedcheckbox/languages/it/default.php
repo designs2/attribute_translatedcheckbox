@@ -8,9 +8,9 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2013-07-08T04:11:40+02:00
+ * last-updated: 2013-07-08T08:16:40+02:00
  */
 
-
-$GLOBALS['TL_LANG']['MSC']['metamodel_filtersetting']['ignore_published']['0'] = 'Ignora campo di pubblicazione %s';
-$GLOBALS['TL_LANG']['MSC']['metamodel_filtersetting']['ignore_published']['1'] = 'Se si seleziona questo, la condizione di pubblicazione per l\'attributo %s non verrà applicata nel filtro.';
+$GLOBALS['TL_LANG']['MSC']['metamodel_filtersetting']['ignore_published']['0']     = 'Ignora campo di pubblicazione %s';
+$GLOBALS['TL_LANG']['MSC']['metamodel_filtersetting']['ignore_published']['1']     = 'Se si seleziona questo, la condizione di pubblicazione per l\'attributo %s non verrà applicata nel filtro.';
+$GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle']['1'] = 'Attiva/disattiva %s';
