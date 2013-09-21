@@ -15,6 +15,10 @@
  * @filesource
  */
 
+use MetaModels\Filter\Setting\Simple as MetaModelFilterSetting;
+use MetaModels\Filter\Rules\SimpleQuery as MetaModelFilterRuleSimpleQuery;
+use MetaModels\Filter\Rules\StaticIdList as MetaModelFilterRuleStaticIdList;
+
 class MetaModelFilterSettingPublishedTranslatedCheckbox extends MetaModelFilterSetting
 {
 	public function prepareRules(IMetaModelFilter $objFilter, $arrFilterUrl)

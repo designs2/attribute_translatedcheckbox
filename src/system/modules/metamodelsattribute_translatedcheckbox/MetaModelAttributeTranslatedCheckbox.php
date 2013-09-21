@@ -15,6 +15,8 @@
  * @filesource
  */
 
+use MetaModels\Attribute\TranslatedReference as MetaModelAttributeTranslatedReference;
+
 /**
  * This is the MetaModelAttribute class for handling translated checkbox fields.
  *
