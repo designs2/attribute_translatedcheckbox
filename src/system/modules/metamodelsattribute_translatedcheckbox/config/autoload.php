@@ -20,6 +20,8 @@
  */
 ClassLoader::addClasses(array
 (
+	'MetaModelAttributeTranslatedCheckboxBackendHelper' => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModelAttributeTranslatedCheckboxBackendHelper.php',
+	'MetaModelFilterSettingPublishedTranslatedCheckbox' => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModelFilterSettingPublishedTranslatedCheckbox.php',
 	'MetaModelAttributeTranslatedCheckbox'              => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModelAttributeTranslatedCheckbox.php',
 ));
 
@@ -29,5 +31,5 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
-	'mm_attr_translatedcheckbox'              => 'system/modules/metamodelsattribute_translatedcheckbox/templates',
+	'mm_attr_translatedcheckbox' => 'system/modules/metamodelsattribute_translatedcheckbox/templates',
 ));
