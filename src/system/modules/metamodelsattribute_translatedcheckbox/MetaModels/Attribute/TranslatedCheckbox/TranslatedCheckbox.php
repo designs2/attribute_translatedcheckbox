@@ -8,23 +8,26 @@
  *
  * PHP version 5
  * @package     MetaModels
- * @subpackage  AttributeTranslatedCheckbox
+ * @subpackage  AttributeTranslatedAlias
  * @author      Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @copyright   The MetaModels team.
  * @license     LGPL.
  * @filesource
  */
 
-use MetaModels\Attribute\TranslatedReference as MetaModelAttributeTranslatedReference;
+namespace MetaModels\Attribute\TranslatedCheckbox;
 
-/**
- * This is the MetaModelAttribute class for handling translated checkbox fields.
- *
- * @package	   MetaModels
- * @subpackage AttributeTranslatedCheckbox
- * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
- */
-class MetaModelAttributeTranslatedCheckbox extends MetaModelAttributeTranslatedReference
+use MetaModels\Attribute\TranslatedReference;
+use MetaModels\Helper\ContaoController;
+
+	/**
+	 * This is the MetaModelAttribute class for handling translated checkbox fields.
+	 *
+	 * @package	   MetaModels
+	 * @subpackage AttributeTranslatedCheckbox
+	 * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
+	 */
+class TranslatedCheckbox extends TranslatedReference
 {
 	public function isPublishedField()
 	{
@@ -58,7 +61,7 @@ class MetaModelAttributeTranslatedCheckbox extends MetaModelAttributeTranslatedR
 
 	protected function generateToggleAction($strLangcode, $blnIsActive)
 	{
-		$arrLanguages = MetaModelController::getInstance()->getLanguages();
+		$arrLanguages = ContaoController::getInstance()->getLanguages();
 		$arrLabel     = array
 		(
 			0 => sprintf($GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][1], $arrLanguages[$strLangcode]),
@@ -78,7 +81,7 @@ class MetaModelAttributeTranslatedCheckbox extends MetaModelAttributeTranslatedR
 			'attributes'          =>
 				'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleTranslatedPublishCheckbox(this, %s);"' .
 				' class="'.($blnIsActive ? 'contextmenu' : 'edit-header').'"',
-			'button_callback'     => array('MetaModelAttributeTranslatedCheckboxBackendHelper', 'toggleIcon'),
+			'button_callback'     => array('MetaModels\Helper\TranslatedCheckbox\Helper', 'toggleIcon'),
 		);
 	}
 
@@ -105,7 +108,7 @@ class MetaModelAttributeTranslatedCheckbox extends MetaModelAttributeTranslatedR
 						'onload_callback' => array(
 							// NOTE: we need to define an explicit key here, as otherwise we will effectively kill any
 							// other callback (due to usage of same key '0').
-							'translatedcheckbox' => array('MetaModelAttributeTranslatedCheckboxBackendHelper', 'checkToggle')
+							'translatedcheckbox' => array('MetaModels\Helper\TranslatedCheckbox\Helper', 'checkToggle')
 						),
 					),
 					'list' => array

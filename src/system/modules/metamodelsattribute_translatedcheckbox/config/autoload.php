@@ -20,9 +20,9 @@
  */
 ClassLoader::addClasses(array
 (
-	'MetaModelAttributeTranslatedCheckboxBackendHelper' => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModelAttributeTranslatedCheckboxBackendHelper.php',
-	'MetaModelFilterSettingPublishedTranslatedCheckbox' => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModelFilterSettingPublishedTranslatedCheckbox.php',
-	'MetaModelAttributeTranslatedCheckbox'              => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModelAttributeTranslatedCheckbox.php',
+	'MetaModels\Helper\TranslatedCheckbox\Helper'                => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModels/Helper/TranslatedCheckbox/Helper.php',
+	'MetaModels\Filter\Setting\Published\TranslatedCheckbox'     => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModels/Filter/Setting/Published/TranslatedCheckbox.php',
+	'MetaModels\Attribute\TranslatedCheckbox\TranslatedCheckbox' => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModels/Attribute/TranslatedCheckbox/TranslatedCheckbox.php',
 ));
 
 

@@ -15,6 +15,14 @@
  * @filesource
  */
 
+namespace MetaModels\Helper\TranslatedCheckbox;
+
+use MetaModels\Attribute\TranslatedCheckbox\TranslatedCheckbox;
+use MetaModels\Dca\Filter;
+use MetaModels\Factory;
+use MetaModels\Helper\ContaoController;
+use MetaModels\IItem;
+
 /**
  * This class is used from checkbox attributes for button callbacks etc.
  *
@@ -22,14 +30,14 @@
  * @subpackage AttributeTranslatedCheckbox
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  */
-class MetaModelAttributeTranslatedCheckboxBackendHelper extends Backend
+class Helper extends \Backend
 {
 	/**
 	 * Render a row for the list view in the backend.
 	 *
 	 * @param array         $arrRow   the current data row.
 	 * @param string        $strLabel the label text.
-	 * @param DataContainer $objDC    the DataContainer instance that called the method.
+	 * @param \DataContainer $objDC    the DataContainer instance that called the method.
 	 */
 	public function toggleIcon($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes)
 	{
@@ -38,13 +46,13 @@ class MetaModelAttributeTranslatedCheckboxBackendHelper extends Backend
 			$strMetaModel = $arrMatch[1];
 			$strAttribute = $arrMatch[2];
 			$strLang      = $arrMatch[3];
-			if(!(($objMetaModel = MetaModelFactory::byTableName($strMetaModel))
+			if(!(($objMetaModel = Factory::byTableName($strMetaModel))
 				&& ($objAttribute = $objMetaModel->getAttribute($strAttribute))))
 			{
 				return '';
 			}
 
-			/* @var MetaModelAttributeTranslatedCheckbox $objAttribute */
+			/** @var TranslatedCheckbox $objAttribute */
 			$arrValues = $objAttribute->getTranslatedDataFor(array($arrRow['id']), $strLang);
 			$arrValue  = $arrValues[$arrRow['id']];
 
@@ -72,28 +80,28 @@ class MetaModelAttributeTranslatedCheckboxBackendHelper extends Backend
 
 	public function checkToggle()
 	{
-		if (Input::getInstance()->get('action') != 'publishtranslatedcheckboxtoggle')
+		if (\Input::getInstance()->get('action') != 'publishtranslatedcheckboxtoggle')
 		{
 			return;
 		}
 
 		// TODO: check if the attribute is allowed to be edited by the current backend user or is this already done as the attribute would not be contained within the DCA otherwise?
-		$strAttribute = Input::getInstance()->get('attribute');
-		if(($objMetaModel = MetaModelFactory::byTableName(Input::getInstance()->get('metamodel')))
+		$strAttribute = \Input::getInstance()->get('attribute');
+		if(($objMetaModel = Factory::byTableName(\Input::getInstance()->get('metamodel')))
 		&& ($objAttribute = $objMetaModel->getAttribute($strAttribute)))
 		{
-			if (!($intId = intval(Input::getInstance()->get('tid'))))
+			if (!($intId = intval(\Input::getInstance()->get('tid'))))
 			{
 				return;
 			}
-			$strState = Input::getInstance()->get('state') == '1' ? '1' : '';
+			$strState = \Input::getInstance()->get('state') == '1' ? '1' : '';
 
-			if (!($strLang = Input::getInstance()->get('lang')))
+			if (!($strLang = \Input::getInstance()->get('lang')))
 			{
 				return;
 			}
 
-			/* @var IMetaModelItem $objItem */
+			/** @var IItem $objItem */
 			if (!($objItem = $objMetaModel->findById($intId)))
 			{
 				return;
@@ -114,7 +122,7 @@ class MetaModelAttributeTranslatedCheckboxBackendHelper extends Backend
 				}
 			}
 
-			/* @var MetaModelAttributeTranslatedCheckbox $objAttribute */
+			/** @var TranslatedCheckbox $objAttribute */
 			$arrValues = $objAttribute->getTranslatedDataFor($arrIds, $strLang);
 
 			foreach ($arrIds as $intId)
@@ -129,21 +137,21 @@ class MetaModelAttributeTranslatedCheckboxBackendHelper extends Backend
 			$objAttribute->setTranslatedDataFor($arrValues, $strLang);
 		}
 
-		$objEnvironment = Environment::getInstance();
+		$objEnvironment = \Environment::getInstance();
 
 		if ($objEnvironment->isAjaxRequest)
 		{
 			exit;
 		}
 
-		MetaModelController::getInstance()->redirect(
-			$objEnvironment->base . $objEnvironment->script . '?do=' . Input::getInstance()->get('do')
+		ContaoController::getInstance()->redirect(
+			$objEnvironment->base . $objEnvironment->script . '?do=' . \Input::getInstance()->get('do')
 		);
 	}
 
-	public function drawPublishedSetting($arrRow, $strLabel, DataContainer $objDC = null, $imageAttribute='', $strImage)
+	public function drawPublishedSetting($arrRow, $strLabel, \DataContainer $objDC = null, $imageAttribute='', $strImage)
 	{
-		$objMetaModel = TableMetaModelFilterSetting::getInstance()->getMetaModel($objDC);
+		$objMetaModel = Filter::getInstance()->getMetaModel($objDC);
 
 		$objAttribute = $objMetaModel->getAttributeById($arrRow['attr_id']);
 

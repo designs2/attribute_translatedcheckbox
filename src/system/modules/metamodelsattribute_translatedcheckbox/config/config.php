@@ -15,10 +15,10 @@
  * @filesource
  */
 
-$GLOBALS['METAMODELS']['attributes']['translatedcheckbox']['class'] = 'MetaModelAttributeTranslatedCheckbox';
+$GLOBALS['METAMODELS']['attributes']['translatedcheckbox']['class'] = 'MetaModels\Attribute\TranslatedCheckbox\TranslatedCheckbox';
 $GLOBALS['METAMODELS']['attributes']['translatedcheckbox']['image'] = 'system/modules/metamodelsattribute_translatedcheckbox/html/checkbox.png';
 
-$GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['class'] = 'MetaModelFilterSettingPublishedTranslatedCheckbox';
+$GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['class'] = 'MetaModels\Filter\Setting\Published\TranslatedCheckbox';
 $GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['image'] = 'system/modules/metamodels/html/visible.png';
-$GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['info_callback'] = array('MetaModelAttributeTranslatedCheckboxBackendHelper', 'drawPublishedSetting');
+$GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['info_callback'] = array('MetaModels\Helper\TranslatedCheckbox\Helper', 'drawPublishedSetting');
 $GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['attr_filter'][] = 'translatedcheckbox';
