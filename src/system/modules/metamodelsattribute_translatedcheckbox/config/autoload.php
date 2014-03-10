@@ -20,7 +20,9 @@
  */
 ClassLoader::addClasses(array
 (
-	'MetaModelAttributeTranslatedCheckbox'              => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModelAttributeTranslatedCheckbox.php',
+	'MetaModelAttributeTranslatedCheckbox'                  => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModelAttributeTranslatedCheckbox.php',
+	'MetaModelAttributeTranslatedCheckboxBackendHelper'     => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModelAttributeTranslatedCheckboxBackendHelper.php',
+	'MetaModelFilterSettingPublishedTranslatedCheckbox'     => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModelFilterSettingPublishedTranslatedCheckbox.php',
 ));
 
 
