@@ -30,5 +30,5 @@ $GLOBALS['TL_DCA']['tl_metamodel_attribute']['fields']['check_publish'] = array
 	'label'                 => &$GLOBALS['TL_LANG']['tl_metamodel_attribute']['check_publish'],
 	'exclude'               => true,
 	'inputType'             => 'checkbox',
-	'eval'                  => array('tl_class'=>'w50'),
+	'eval'                  => array('tl_class' => 'w50'),
 );

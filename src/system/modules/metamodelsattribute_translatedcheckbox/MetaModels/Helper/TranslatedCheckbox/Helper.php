@@ -35,9 +35,21 @@ class Helper extends \Backend
 	/**
 	 * Render a row for the list view in the backend.
 	 *
-	 * @param array         $arrRow   the current data row.
-	 * @param string        $strLabel the label text.
-	 * @param \DataContainer $objDC    the DataContainer instance that called the method.
+	 * @param array  $arrRow        The current data row.
+	 *
+	 * @param string $strHref       The href to use.
+	 *
+	 * @param string $strLabel      The label text.
+	 *
+	 * @param string $strTitle      The title.
+	 *
+	 * @param string $strIcon       The icon to use.
+	 *
+	 * @param string $strAttributes The attributes.
+	 *
+	 * @internal param \DataContainer $objDC The DataContainer instance that called the method.
+	 *
+	 * @return string
 	 */
 	public function toggleIcon($arrRow, $strHref, $strLabel, $strTitle, $strIcon, $strAttributes)
 	{
@@ -46,7 +58,7 @@ class Helper extends \Backend
 			$strMetaModel = $arrMatch[1];
 			$strAttribute = $arrMatch[2];
 			$strLang      = $arrMatch[3];
-			if(!(($objMetaModel = Factory::byTableName($strMetaModel))
+			if (!(($objMetaModel = Factory::byTableName($strMetaModel))
 				&& ($objAttribute = $objMetaModel->getAttribute($strAttribute))))
 			{
 				return '';
@@ -76,8 +88,17 @@ class Helper extends \Backend
 				$strImg?$strImg:$strLabel
 			) . "\n\n";
 		}
+
+		return '';
 	}
 
+	/**
+	 * Check if a toggle operation has been triggered.
+	 *
+	 * If so, update the model accordingly.
+	 *
+	 * @return void
+	 */
 	public function checkToggle()
 	{
 		if (\Input::getInstance()->get('action') != 'publishtranslatedcheckboxtoggle')
@@ -85,9 +106,10 @@ class Helper extends \Backend
 			return;
 		}
 
-		// TODO: check if the attribute is allowed to be edited by the current backend user or is this already done as the attribute would not be contained within the DCA otherwise?
+		// TODO: check if the attribute is allowed to be edited by the current backend user
+		// Or is this already done as the attribute would not be contained within the DCA otherwise?
 		$strAttribute = \Input::getInstance()->get('attribute');
-		if(($objMetaModel = Factory::byTableName(\Input::getInstance()->get('metamodel')))
+		if (($objMetaModel = Factory::byTableName(\Input::getInstance()->get('metamodel')))
 		&& ($objAttribute = $objMetaModel->getAttribute($strAttribute)))
 		{
 			if (!($intId = intval(\Input::getInstance()->get('tid'))))
@@ -109,7 +131,7 @@ class Helper extends \Backend
 
 			$arrIds = array($objItem->get('id'));
 
-			// determine variants.
+			// Determine variants.
 			if ($objMetaModel->hasVariants() && !$objAttribute->get('isvariant'))
 			{
 				if ($objItem->isVariantBase())
@@ -149,7 +171,22 @@ class Helper extends \Backend
 		);
 	}
 
-	public function drawPublishedSetting($arrRow, $strLabel, \DataContainer $objDC = null, $imageAttribute='', $strImage)
+	/**
+	 * Draw a published setting in the filter settings.
+	 *
+	 * @param array          $arrRow         The data information.
+	 *
+	 * @param string         $strLabel       The label string.
+	 *
+	 * @param \DataContainer $objDC          The data container.
+	 *
+	 * @param string         $imageAttribute The image attribute string.
+	 *
+	 * @param string         $strImage       The image name.
+	 *
+	 * @return string
+	 */
+	public function drawPublishedSetting($arrRow, $strLabel, \DataContainer $objDC = null, $imageAttribute = '', $strImage)
 	{
 		$objMetaModel = Filter::getInstance()->getMetaModel($objDC);
 
@@ -161,10 +198,13 @@ class Helper extends \Backend
 		} else {
 			$strAttrName = $arrRow['attr_id'];
 		}
-		
+
 		if (!empty($arrRow['comment']))
 		{
-			$arrRow['comment'] = sprintf($GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['typedesc']['_comment_'], $arrRow['comment']);
+			$arrRow['comment'] = sprintf(
+				$GLOBALS['TL_LANG']['tl_metamodel_filtersetting']['typedesc']['_comment_'],
+				$arrRow['comment']
+			);
 		}
 
 		$strReturn = sprintf(

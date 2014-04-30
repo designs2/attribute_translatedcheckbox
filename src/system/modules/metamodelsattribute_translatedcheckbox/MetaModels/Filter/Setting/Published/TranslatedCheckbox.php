@@ -22,8 +22,16 @@ use MetaModels\Filter\Rules\SimpleQuery as MetaModelFilterRuleSimpleQuery;
 use MetaModels\Filter\Rules\StaticIdList as MetaModelFilterRuleStaticIdList;
 use MetaModels\Filter\IFilter as IMetaModelFilter;
 
+/**
+ * Filter setting to filter for translated checkboxes.
+ *
+ * @package MetaModels\Filter\Setting\Published
+ */
 class TranslatedCheckbox extends MetaModelFilterSetting
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	public function prepareRules(IMetaModelFilter $objFilter, $arrFilterUrl)
 	{
 		if ($this->get('check_ignorepublished') && $arrFilterUrl['ignore_published' . $this->get('id')])

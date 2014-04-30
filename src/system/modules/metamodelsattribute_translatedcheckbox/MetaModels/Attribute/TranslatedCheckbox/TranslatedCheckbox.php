@@ -8,7 +8,7 @@
  *
  * PHP version 5
  * @package     MetaModels
- * @subpackage  AttributeTranslatedAlias
+ * @subpackage  AttributeTranslatedCheckbox
  * @author      Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @copyright   The MetaModels team.
  * @license     LGPL.
@@ -23,17 +23,25 @@ use MetaModels\Helper\ContaoController;
 	/**
 	 * This is the MetaModelAttribute class for handling translated checkbox fields.
 	 *
-	 * @package	   MetaModels
+	 * @package    MetaModels
 	 * @subpackage AttributeTranslatedCheckbox
 	 * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
 	 */
 class TranslatedCheckbox extends TranslatedReference
 {
+	/**
+	 * Check if the attribute is a published field.
+	 *
+	 * @return bool
+	 */
 	public function isPublishedField()
 	{
 		return $this->get('check_publish') == 1;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getAttributeSettingNames()
 	{
 		return array_merge(parent::getAttributeSettingNames(), array(
@@ -45,11 +53,17 @@ class TranslatedCheckbox extends TranslatedReference
 		));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	protected function getValueTable()
 	{
 		return 'tl_metamodel_translatedcheckbox';
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getFieldDefinition($arrOverrides = array())
 	{
 		$arrFieldDef = parent::getFieldDefinition($arrOverrides);
@@ -59,13 +73,28 @@ class TranslatedCheckbox extends TranslatedReference
 		return $arrFieldDef;
 	}
 
+	/**
+	 * Generate the operation array to be used in the dca for the given language code..
+	 *
+	 * @param string $strLangcode The language code to use.
+	 *
+	 * @param bool   $blnIsActive Flag determining if the operation shall have the active image or inactive.
+	 *
+	 * @return array
+	 */
 	protected function generateToggleAction($strLangcode, $blnIsActive)
 	{
 		$arrLanguages = ContaoController::getInstance()->getLanguages();
 		$arrLabel     = array
 		(
-			0 => sprintf($GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][1], $arrLanguages[$strLangcode]),
-			1 => sprintf($GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][1], $arrLanguages[$strLangcode])
+			0 => sprintf(
+				$GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][1],
+				$arrLanguages[$strLangcode]
+			),
+			1 => sprintf(
+				$GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][1],
+				$arrLanguages[$strLangcode]
+			)
 		);
 
 		return array
@@ -80,18 +109,23 @@ class TranslatedCheckbox extends TranslatedReference
 			),
 			'attributes'          =>
 				'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleTranslatedPublishCheckbox(this, %s);"' .
-				' class="'.($blnIsActive ? 'contextmenu' : 'edit-header').'"',
+				' class="' .
+				($blnIsActive ? 'contextmenu' : 'edit-header') .
+				'"',
 			'button_callback'     => array('MetaModels\Helper\TranslatedCheckbox\Helper', 'toggleIcon'),
 		);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getItemDCA($arrOverrides = array())
 	{
 		$arrDCA = parent::getItemDCA($arrOverrides);
 		if ($this->isPublishedField())
 		{
-			$strActiveLanguage = $this->getMetaModel()->getActiveLanguage();
-			$arrAllOperations  = array();
+			$strActiveLanguage                                = $this->getMetaModel()->getActiveLanguage();
+			$arrAllOperations                                 = array();
 			$arrAllOperations['toggle_' . $strActiveLanguage] = $this->generateToggleAction($strActiveLanguage, true);
 
 			foreach (array_diff($this->getMetaModel()->getAvailableLanguages(), array($strActiveLanguage)) as $strLangcode)
@@ -117,12 +151,16 @@ class TranslatedCheckbox extends TranslatedReference
 					)
 				)
 			);
+
 			$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/metamodelsattribute_translatedcheckbox/html/publish.js';
 		}
 
 		return $arrDCA;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getTranslatedDataFor($arrIds, $strLangCode)
 	{
 		$arrReturn = parent::getTranslatedDataFor($arrIds, $strLangCode);
