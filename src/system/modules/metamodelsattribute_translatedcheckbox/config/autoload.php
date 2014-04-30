@@ -16,17 +16,6 @@
  */
 
 /**
- * Register the classes
- */
-ClassLoader::addClasses(array
-(
-	'MetaModels\Helper\TranslatedCheckbox\Helper'                => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModels/Helper/TranslatedCheckbox/Helper.php',
-	'MetaModels\Filter\Setting\Published\TranslatedCheckbox'     => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModels/Filter/Setting/Published/TranslatedCheckbox.php',
-	'MetaModels\Attribute\TranslatedCheckbox\TranslatedCheckbox' => 'system/modules/metamodelsattribute_translatedcheckbox/MetaModels/Attribute/TranslatedCheckbox/TranslatedCheckbox.php',
-));
-
-
-/**
  * Register the templates
  */
 TemplateLoader::addFiles(array
