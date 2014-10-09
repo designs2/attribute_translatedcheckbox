@@ -31,3 +31,5 @@ $GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['info_callback
 	'drawPublishedSetting'
 );
 $GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['attr_filter'][] = 'translatedcheckbox';
+
+$GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'MetaModels\Events\Attribute\TranslatedCheckbox\Listener';
