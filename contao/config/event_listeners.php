@@ -17,13 +17,28 @@
 
 use MetaModels\Attribute\Events\CreateAttributeFactoryEvent;
 use MetaModels\Attribute\TranslatedCheckbox\AttributeTypeFactory;
+use MetaModels\Events\Attribute\TranslatedCheckbox\PublishedFilterSettingTypeRenderer;
+use MetaModels\Events\MetaModelsBootEvent;
+use MetaModels\Filter\Setting\Events\CreateFilterSettingFactoryEvent;
+use MetaModels\Filter\Setting\Published\TranslatedCheckboxFilterSettingTypeFactory;
 use MetaModels\MetaModelsEvents;
 
 return array(
+    MetaModelsEvents::SUBSYSTEM_BOOT_BACKEND => array(
+        function (MetaModelsBootEvent $event) {
+            new PublishedFilterSettingTypeRenderer($event->getServiceContainer());
+        }
+    ),
     MetaModelsEvents::ATTRIBUTE_FACTORY_CREATE => array(
         function (CreateAttributeFactoryEvent $event) {
             $factory = $event->getFactory();
             $factory->addTypeFactory(new AttributeTypeFactory());
+        }
+    ),
+    MetaModelsEvents::FILTER_SETTING_FACTORY_CREATE => array(
+        function (CreateFilterSettingFactoryEvent $event) {
+            $factory = $event->getFactory();
+            $factory->addTypeFactory(new TranslatedCheckboxFilterSettingTypeFactory());
         }
     )
 );
