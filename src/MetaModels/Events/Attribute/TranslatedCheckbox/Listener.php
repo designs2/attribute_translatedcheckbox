@@ -8,7 +8,7 @@
  * PHP version 5
  *
  * @package    MetaModels
- * @subpackage Frontend
+ * @subpackage AttributeTranslatedCheckbox
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  * @copyright  The MetaModels team.
  * @license    LGPL.
@@ -23,22 +23,25 @@ use ContaoCommunityAlliance\DcGeneral\DataDefinition\Definition\View\CommandColl
 use ContaoCommunityAlliance\DcGeneral\DataDefinition\Definition\View\ToggleCommand;
 use MetaModels\Attribute\IAttribute;
 use MetaModels\Attribute\TranslatedCheckbox\TranslatedCheckbox;
-use MetaModels\Events\BuildAttributeEvent;
+use MetaModels\DcGeneral\Events\BaseSubscriber;
+use MetaModels\DcGeneral\Events\MetaModel\BuildMetaModelOperationsEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * This class creates the default instances for property conditions when generating input screens.
  */
-class Listener implements EventSubscriberInterface
+class Listener extends BaseSubscriber
 {
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents()
+    public function registerEventsInDispatcher()
     {
-        return array(
-            BuildAttributeEvent::NAME => __CLASS__ . '::handle'
-        );
+        $this
+            ->addListener(
+                BuildMetaModelOperationsEvent::NAME,
+                array($this, 'handle')
+            );
     }
 
     /**
@@ -64,50 +67,40 @@ class Listener implements EventSubscriberInterface
         if (!$commands->hasCommandNamed($commandName)) {
             $toggle = new ToggleCommand();
             $toggle->setName($commandName);
-            $toggle->setLabel(
-                sprintf($GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][0], $language)
-            );
+            $toggle->setLabel($GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][0]);
             $toggle->setDescription(
-                sprintf($GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][1], $language)
+                sprintf(
+                    $GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][1],
+                    $attribute->getName(),
+                    $language
+                )
             );
             $extra          = $toggle->getExtra();
             $extra['icon']  = 'visible.gif';
             $extra['class'] = $class;
             $toggle->setToggleProperty($attribute->getColName());
-            $commands->addCommand($toggle);
+
+            if ($commands->hasCommandNamed('show')) {
+                $info = $commands->getCommandNamed('show');
+            } else {
+                $info = null;
+            }
+            $commands->addCommand($toggle, $info);
         }
     }
 
     /**
-     * Create the property conditions.
+     * Build a attribute toggle operation for all languages of the MetaModel.
      *
-     * @param BuildAttributeEvent $event The event.
+     * @param TranslatedCheckbox         $attribute The checkbox attribute.
+     *
+     * @param CommandCollectionInterface $commands  The already existing commands.
      *
      * @return void
-     *
-     * @throws \RuntimeException When no MetaModel is attached to the event or any other important information could
-     *                           not be retrieved.
      */
-    public function handle(BuildAttributeEvent $event)
+    protected function buildCommandsFor($attribute, $commands)
     {
-        if (!(($event->getAttribute() instanceof TranslatedCheckbox)
-            && ($event->getAttribute()->get('check_publish') == 1))
-        ) {
-            return;
-        }
-
-        $container = $event->getContainer();
-
-        if ($container->hasDefinition(Contao2BackendViewDefinitionInterface::NAME)) {
-            $view = $container->getDefinition(Contao2BackendViewDefinitionInterface::NAME);
-        } else {
-            $view = new Contao2BackendViewDefinition();
-            $container->setDefinition(Contao2BackendViewDefinitionInterface::NAME, $view);
-        }
-
-        $attribute      = $event->getAttribute();
         $activeLanguage = $attribute->getMetaModel()->getActiveLanguage();
-        $commands       = $view->getModelCommands();
         $commandName    = 'publishtranslatedcheckboxtoggle_' . $attribute->getColName();
 
         $this->generateToggleCommand(
@@ -126,6 +119,32 @@ class Listener implements EventSubscriberInterface
                 'edit-header',
                 $langCode
             );
+        }
+    }
+
+    /**
+     * Create the property conditions.
+     *
+     * @param BuildMetaModelOperationsEvent $event The event.
+     *
+     * @return void
+     *
+     * @throws \RuntimeException When no MetaModel is attached to the event or any other important information could
+     *                           not be retrieved.
+     */
+    public function handle(BuildMetaModelOperationsEvent $event)
+    {
+        foreach ($event->getMetaModel()->getAttributes() as $attribute) {
+            if (($attribute instanceof TranslatedCheckbox) && ($attribute->get('check_publish') == 1)) {
+                $container = $event->getContainer();
+                if ($container->hasDefinition(Contao2BackendViewDefinitionInterface::NAME)) {
+                    $view = $container->getDefinition(Contao2BackendViewDefinitionInterface::NAME);
+                } else {
+                    $view = new Contao2BackendViewDefinition();
+                    $container->setDefinition(Contao2BackendViewDefinitionInterface::NAME, $view);
+                }
+                $this->buildCommandsFor($attribute, $view->getModelCommands());
+            }
         }
     }
 }

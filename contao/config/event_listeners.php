@@ -17,6 +17,7 @@
 
 use MetaModels\Attribute\Events\CreateAttributeFactoryEvent;
 use MetaModels\Attribute\TranslatedCheckbox\AttributeTypeFactory;
+use MetaModels\Events\Attribute\TranslatedCheckbox\Listener;
 use MetaModels\Events\Attribute\TranslatedCheckbox\PublishedFilterSettingTypeRenderer;
 use MetaModels\Events\MetaModelsBootEvent;
 use MetaModels\Filter\Setting\Events\CreateFilterSettingFactoryEvent;
@@ -26,6 +27,7 @@ use MetaModels\MetaModelsEvents;
 return array(
     MetaModelsEvents::SUBSYSTEM_BOOT_BACKEND => array(
         function (MetaModelsBootEvent $event) {
+            new Listener($event->getServiceContainer());
             new PublishedFilterSettingTypeRenderer($event->getServiceContainer());
         }
     ),
