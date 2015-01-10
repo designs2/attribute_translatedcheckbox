@@ -25,11 +25,6 @@ $GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['class'] =
 $GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['image'] =
     'system/modules/metamodels/html/visible.png';
 
-$GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['info_callback'] = array
-(
-    'MetaModels\Helper\TranslatedCheckbox\Helper',
-    'drawPublishedSetting'
-);
 $GLOBALS['METAMODELS']['filters']['translatedcheckbox_published']['attr_filter'][] = 'translatedcheckbox';
 
 $GLOBALS['TL_EVENT_SUBSCRIBERS'][] = 'MetaModels\Events\Attribute\TranslatedCheckbox\Listener';
