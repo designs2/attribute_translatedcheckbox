@@ -10,6 +10,7 @@
  * @package     MetaModels
  * @subpackage  AttributeTranslatedCheckbox
  * @author      Christian Schiffler <c.schiffler@cyberspectrum.de>
+ * @author      Stefan Heimes <stefan_heimes@hotmail.com>
  * @copyright   The MetaModels team.
  * @license     LGPL.
  * @filesource
@@ -21,10 +22,6 @@ use MetaModels\Attribute\TranslatedReference;
 
 /**
  * This is the MetaModelAttribute class for handling translated checkbox fields.
- *
- * @package    MetaModels
- * @subpackage AttributeTranslatedCheckbox
- * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  */
 class TranslatedCheckbox extends TranslatedReference
 {
