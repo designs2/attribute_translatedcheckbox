@@ -1,77 +1,71 @@
 {
-	"name":"metamodels/attribute_translatedcheckbox",
-	"description":"MetaModels attribute for translated checkbox",
-	"keywords":["contao", "metamodels", "attribute", "checkbox", "translatable"],
-	"type":"contao-module",
-	"homepage":"http://now.metamodel.me/",
-	"license":"LGPL-3.0+",
-	"authors":[
-		{
-			"name":"Christian Schiffler",
-			"email":"c.schiffler@cyberspectrum.de",
-			"homepage":"http://www.cyberspectrum.de",
-			"role":"Developer"
-		},
-		{
-			"name":"Andreas Isaak",
-			"email":"info@andreas-isaak.de",
-			"homepage":"http://www.andreas-isaak.de",
-			"role":"Developer"
-		},
-		{
-			"name":"Stefan Heimes",
-			"email":"stefan_heimes@hotmail.com",
-			"role":"Developer"
-		},
-		{
-			"name":"Christian de la Haye",
-			"email":"service@delahaye.de",
-			"homepage":"http://www.delahaye.de/",
-			"role":"Developer"
-		}
-	],
-	"support":{
-		"email":"mail@metamodel.me",
-		"issues":"https://github.com/MetaModels/attribute_translatedcheckbox/issues",
-		"wiki":"http://de.contaowiki.org/MetaModels",
-		"irc":"irc://irc.freenode.org/contao.mm",
-		"source":"https://github.com/MetaModels/attribute_translatedcheckbox"
-	},
-	"require":{
-		"php":">=5.3",
-		"contao/core": ">=2.11,<4.0",
-		"contao-community-alliance/composer-plugin": "*",
-		"metamodels/core":"~2.0.0"
-	},
-	"require-dev": {
-		"metamodels/php-coding-standard":"dev-master",
-		"cyberspectrum/contao-toolbox": "dev-master",
-		"phpunit/phpunit": ">=3.7.10,<4-dev"
-	},
-	"conflict": {
-		"contao/core": "3.0.*"
-	},
-	"autoload": {
-		"psr-0": {
-			"MetaModels": "src/"
-		}
-	},
-	"extra":{
-		"contao": {
-			"symlinks":{
-				"contao":"system/modules/metamodelsattribute_translatedcheckbox"
-			},
-			"transifex": {
-				"project": "metamodels",
-				"prefix": "attribute_translatedcheckbox-",
-				"languages_cto": "contao/languages",
-				"languages_tx": ".tx"
-			}
-		},
-		"branch-alias": {
-			"dev-tng": "2.0.x-dev"
-		}
-	},
-	"minimum-stability": "dev",
-	"prefer-stable": true
+  "name": "metamodels/attribute_translatedcheckbox",
+  "description": "MetaModels attribute for translated checkbox",
+  "keywords": [
+    "contao",
+    "metamodels",
+    "attribute",
+    "checkbox",
+    "translatable"
+  ],
+  "type": "contao-module",
+  "homepage": "http://now.metamodel.me/",
+  "license": "LGPL-3.0+",
+  "authors": [
+    {
+      "name": "Christian Schiffler",
+      "email": "c.schiffler@cyberspectrum.de",
+      "homepage": "http://www.cyberspectrum.de",
+      "role": "Developer"
+    },
+    {
+      "name": "Stefan Heimes",
+      "email": "stefan_heimes@hotmail.com",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "mail@metamodel.me",
+    "issues": "https://github.com/MetaModels/attribute_translatedcheckbox/issues",
+    "wiki": "http://de.contaowiki.org/MetaModels",
+    "irc": "irc://irc.freenode.org/contao.mm",
+    "source": "https://github.com/MetaModels/attribute_translatedcheckbox"
+  },
+  "require": {
+    "php": ">=5.3",
+    "contao/core": ">=2.11,<4.0",
+    "contao-community-alliance/composer-plugin": "*",
+    "metamodels/core": "~2.0.0"
+  },
+  "require-dev": {
+    "metamodels/php-coding-standard": "dev-master",
+    "cyberspectrum/contao-toolbox": "dev-master",
+    "phpunit/phpunit": ">=3.7.10,<4-dev"
+  },
+  "conflict": {
+    "contao/core": "3.0.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "MetaModels": "src/"
+    }
+  },
+  "extra": {
+    "contao": {
+      "symlinks": {
+        "contao": "system/modules/metamodelsattribute_translatedcheckbox"
+      },
+      "transifex": {
+        "project": "metamodels",
+        "prefix": "attribute_translatedcheckbox-",
+        "languages_cto": "contao/languages",
+        "languages_tx": ".tx"
+      }
+    },
+    "branch-alias": {
+      "dev-tng": "2.0.x-dev"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
