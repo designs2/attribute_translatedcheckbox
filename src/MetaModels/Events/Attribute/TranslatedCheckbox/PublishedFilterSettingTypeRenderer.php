@@ -27,9 +27,7 @@ use MetaModels\DcGeneral\Events\Table\FilterSetting\FilterSettingTypeRenderer;
 class PublishedFilterSettingTypeRenderer extends FilterSettingTypeRenderer
 {
     /**
-     * Retrieve the types this renderer is valid for.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     protected function getTypes()
     {
@@ -37,13 +35,7 @@ class PublishedFilterSettingTypeRenderer extends FilterSettingTypeRenderer
     }
 
     /**
-     * Retrieve the parameters for the label.
-     *
-     * @param EnvironmentInterface $environment The environment in use.
-     *
-     * @param ModelInterface       $model       The model.
-     *
-     * @return array
+     * {@inheritdoc}
      */
     protected function getLabelParameters(EnvironmentInterface $environment, ModelInterface $model)
     {
