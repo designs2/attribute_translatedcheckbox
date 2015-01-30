@@ -44,7 +44,6 @@ class TranslatedCheckbox extends TranslatedReference
             'check_publish',
             'filterable',
             'searchable',
-            'sortable',
             'submitOnChange'
         ));
     }
