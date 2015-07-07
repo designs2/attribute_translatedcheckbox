@@ -19,8 +19,8 @@
 
 namespace MetaModels\Filter\Setting\Published;
 
+use MetaModels\Filter\Rules\SearchAttribute;
 use MetaModels\Filter\Setting\Simple as MetaModelFilterSetting;
-use MetaModels\Filter\Rules\SimpleQuery as MetaModelFilterRuleSimpleQuery;
 use MetaModels\Filter\Rules\StaticIdList as MetaModelFilterRuleStaticIdList;
 use MetaModels\Filter\IFilter as IMetaModelFilter;
 
@@ -45,14 +45,8 @@ class TranslatedCheckbox extends MetaModelFilterSetting
 
         $objAttribute = $this->getMetaModel()->getAttributeById($this->get('attr_id'));
         if ($objAttribute) {
-            $objFilterRule = new MetaModelFilterRuleSimpleQuery(sprintf(
-                'SELECT item_id AS id FROM tl_metamodel_translatedcheckbox WHERE att_id=%s AND langcode=? AND value=1',
-                $objAttribute->get('id')
-            ), array(
-                $this->getMetaModel()->getActiveLanguage()
-            ));
+            $objFilterRule = new SearchAttribute($objAttribute, '1', $this->getMetaModel()->getActiveLanguage());
             $objFilter->addFilterRule($objFilterRule);
-
             return;
         }
         // Attribute not found, do not return anyting to prevent leaking of items.
