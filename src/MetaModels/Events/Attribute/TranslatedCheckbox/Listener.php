@@ -20,7 +20,7 @@ namespace MetaModels\Events\Attribute\TranslatedCheckbox;
 use ContaoCommunityAlliance\DcGeneral\Contao\DataDefinition\Definition\Contao2BackendViewDefinition;
 use ContaoCommunityAlliance\DcGeneral\Contao\DataDefinition\Definition\Contao2BackendViewDefinitionInterface;
 use ContaoCommunityAlliance\DcGeneral\DataDefinition\Definition\View\CommandCollectionInterface;
-use ContaoCommunityAlliance\DcGeneral\DataDefinition\Definition\View\ToggleCommand;
+use ContaoCommunityAlliance\DcGeneral\DataDefinition\Definition\View\TranslatedToggleCommand;
 use MetaModels\Attribute\IAttribute;
 use MetaModels\Attribute\TranslatedCheckbox\TranslatedCheckbox;
 use MetaModels\DcGeneral\Events\BaseSubscriber;
@@ -65,20 +65,23 @@ class Listener extends BaseSubscriber
     protected function generateToggleCommand($commands, $attribute, $commandName, $class, $language)
     {
         if (!$commands->hasCommandNamed($commandName)) {
-            $toggle = new ToggleCommand();
-            $toggle->setName($commandName);
-            $toggle->setLabel($GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][0]);
-            $toggle->setDescription(
-                sprintf(
-                    $GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][1],
-                    $attribute->getName(),
-                    $language
-                )
-            );
+            $toggle = new TranslatedToggleCommand();
+            $toggle
+                ->setLanguage($language)
+                ->setToggleProperty($attribute->getColName())
+                ->setName($commandName)
+                ->setLabel($GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][0])
+                ->setDescription(
+                    sprintf(
+                        $GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle'][1],
+                        $attribute->getName(),
+                        $language
+                    )
+                );
+
             $extra          = $toggle->getExtra();
             $extra['icon']  = 'visible.gif';
             $extra['class'] = $class;
-            $toggle->setToggleProperty($attribute->getColName());
 
             if ($commands->hasCommandNamed('show')) {
                 $info = $commands->getCommandNamed('show');
