@@ -6,6 +6,6 @@
    https://github.com/phpcq/phpcq
 
 -->
-<project name="metamodels/attribute-translatedcheckbox" default="build">
+<project name="metamodels/attribute_translatedcheckbox" default="build">
     <import file="vendor/phpcq/phpcq/phpcq.main.xml" />
 </project>
