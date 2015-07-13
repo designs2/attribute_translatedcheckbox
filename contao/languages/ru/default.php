@@ -8,12 +8,11 @@
  *
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  *
- * last-updated: 2014-12-15T12:15:55+01:00
+ * last-updated: 2015-07-11T08:03:30+02:00
  */
 
-
 $GLOBALS['TL_LANG']['MSC']['metamodel_filtersetting']['ignore_published']['0']     = 'Игнорировать опубликованное поле %s';
-$GLOBALS['TL_LANG']['MSC']['metamodel_filtersetting']['ignore_published']['1']     = 'Если вы отметите это, опубликованное условие для атрибута %s не будет применяться в фильтре.';
+$GLOBALS['TL_LANG']['MSC']['metamodel_filtersetting']['ignore_published']['1']     = 'Если вы отметите это то опубликованное условие для атрибута %s не будет применяться в фильтре.';
 $GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle']['0'] = 'Переключить';
-$GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle']['1'] = 'Переключить %s';
+$GLOBALS['TL_LANG']['MSC']['metamodelattribute_translatedcheckbox']['toggle']['1'] = 'Переключение состояния атрибута %s для этого элемента в языке %s';
 
