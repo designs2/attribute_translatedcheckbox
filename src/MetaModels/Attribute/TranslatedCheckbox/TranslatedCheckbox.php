@@ -74,10 +74,14 @@ class TranslatedCheckbox extends TranslatedReference
     {
         $arrReturn = parent::getTranslatedDataFor($arrIds, $strLangCode);
 
-        // Per definition: all values that are not contained are defaulting to false in the fallback language.
-        if (($strLangCode == $this->getMetaModel()->getFallbackLanguage()) && (count($arrReturn) < count($arrIds))) {
-            foreach (array_diff(array_keys($arrReturn), $arrIds) as $intId) {
-                $arrReturn[$intId] = $this->widgetToValue(false, $intId);
+        if (count($arrReturn) < count($arrIds)) {
+            // Per definition:
+            // - all values that are not contained are defaulting to false in the fallback language.
+            // - all values in published not contained are defaulting to false.
+            if ($this->isPublishedField() || ($strLangCode == $this->getMetaModel()->getFallbackLanguage())) {
+                foreach (array_diff($arrIds, array_keys($arrReturn)) as $intId) {
+                    $arrReturn[$intId] = $this->widgetToValue(false, $intId);
+                }
             }
         }
 
